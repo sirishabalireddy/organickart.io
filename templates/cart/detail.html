@@ -1,0 +1,58 @@
+{% extends "food_carts/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Shopping Cart
+{% endblock %}
+
+{% block content %}
+    <h1 id="title">Your Shopping Cart</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Remove</th>
+                    <th>Unit Price</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    {% with product=item.product %}
+                        <tr>
+                            <td>
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img src="{% if product.image %}{{ product.image.url}}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100" height="50">
+                                </a>
+                            </td>
+                            <td>{{ product.name }}</td>
+                            <td> &nbsp {{ item.quantity }}
+                                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                                    <input type="submit" value="Update">
+                                    {% csrf_token %}
+                                </form>
+                            </td>
+                            <td><a href="{% url "cart:cart_remove" product.id %}"><button type="button" class="btn btn-danger">Remove</button></a> </td>
+                            <td class="num">₹ {{ item.price }}</td>
+                            <td class="num">₹ {{ item.total_price }}</td>
+                        </tr>
+                    {% endwith %}
+                {% endfor %}
+                <tr class="total">
+                    <td>Total</td>
+                    <td colspan="4"></td>
+                    <td class="num">₹ {{ cart.get_total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="cart_options">
+        <a href="{% url "food_carts:product_list" %}" class="buttonlight"><button type="button" class="btn btn-default">Continue Shopping</button></a>
+        <a href="{% url 'orders:orders_create' %}" class="button"><button type="button" class="btn btn-default">Checkout</button></a>
+    </p>
+{% endblock %}

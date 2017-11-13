@@ -1,0 +1,54 @@
+body{
+    background-color: #ececec;
+}
+
+h1, h2{
+    font-family: 'Lobster', cursive;
+    font-color: #686868;
+}
+
+.product{
+    padding: 20px;
+    width: 20%;
+    height: 10%;
+    margin: 2%;
+}
+
+#main{
+    margin-left: 7%;
+}
+
+#title{
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+#food_slideshow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 200px;
+    width: 100%;
+    background-color: #1a2226;
+}
+
+.product_detail img{
+    margin-top: 20px;
+}
+
+.cart_options{
+    text-align: center;
+}
+
+.order_list{
+    text-align: left;
+}
+
+.order_list h2{
+    font-family: Arial;
+    font-size: 20px;
+
+}
+.checkout{
+    margin-left: 25%;
+}
